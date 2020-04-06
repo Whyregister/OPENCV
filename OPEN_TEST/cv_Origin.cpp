@@ -116,8 +116,15 @@ int main( )
     Mat frame;              //存储每一帧的图像
     frame = imread("2.jpg",4);
     Mat fhsv;
-    cvtColor(frame,fhsv,COLOR_BGR2HSV_FULL);   //将图像转换为HSV模型
-        
+    cvtColor(frame,fhsv,COLOR_BGR2HSV);   //将图像转换为HSV模型
+    Mat hsvSplit;
+    
+    //因为我们读取的是彩色图，直方图均衡化需要在HSV空间做
+    split(fhsv, hsvSplit);
+    equalizeHist(hsvSplit[2],
+    merge(hsvSplit,imgHSV);
+
+
     inRange(frame,Scalar(minh,mins,minv),Scalar(maxh,maxs,maxv),special); //找寻在要求区间内的颜色
 
 
